@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import paho.mqtt.client as mqtt
+from Test_whatsapp import send_whatsapp_alert
 
 # ----------------------
 # MQTT Setup
@@ -33,10 +34,12 @@ while True:
         if "hello start" in command:
             mqtt_client.publish(MQTT_TOPIC, "1")
             print("✅ Published: 1 (START)")
+            send_whatsapp_alert(" Voice command received: START the machine.")
 
         elif "hello stop" in command:
             mqtt_client.publish(MQTT_TOPIC, "0")
             print("🛑 Published: 0 (STOP)")
+            send_whatsapp_alert("🛑 Voice command received: STOP the machine.")
 
         else:
             print("⏸️ Ignored — no valid command found.")
